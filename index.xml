@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Bins Notes</title>
+        <title>Bin&#39;s Notes</title>
         <link>https://notes-bin.github.io/</link>
-        <description>This is my cool site</description>
+        <description>Bin&#39;s Notes</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
             <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Fri, 27 Jan 2023 13:13:45 &#43;0800</lastBuildDate>
             <atom:link href="https://notes-bin.github.io/index.xml" rel="self" type="application/rss+xml" />
