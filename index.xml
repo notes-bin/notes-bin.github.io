@@ -1,9 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>我的全新 Hugo 网站</title>
-        <link>http://example.org/</link>
+        <title>Bins Notes</title>
+        <link>https://notes-bin.github.io/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language>
-            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
+            <webMaster>417086484@qq.com (notes-bin)</webMaster>
+            <atom:link href="https://notes-bin.github.io/index.xml" rel="self" type="application/rss+xml" />
         </channel>
 </rss>
