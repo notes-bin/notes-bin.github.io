@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>本地Yum源搭建 - Bin&#39;s Notes</title><meta name="Description" content="notes-bin的个人博客"><meta property="og:title" content="本地Yum源搭建" />
+<meta property="og:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://notes-bin.github.io/posts/linux/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-29T11:23:39+08:00" />
+<meta property="article:modified_time" content="2023-01-29T11:23:39+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="本地Yum源搭建"/>
+<meta name="twitter:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法"/>
+<meta name="application-name" content="Bin&#39;s Notes">
+<meta name="apple-mobile-web-app-title" content="Bin&#39;s Notes"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://notes-bin.github.io/posts/linux/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" /><link rel="prev" href="https://notes-bin.github.io/posts/%E5%85%B3%E4%BA%8E/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "本地Yum源搭建",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/"
+        },"genre": "posts","wordcount":  835 ,
+        "url": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/","datePublished": "2023-01-29T11:23:39+08:00","dateModified": "2023-01-29T11:23:39+08:00","publisher": {
+            "@type": "Organization",
+            "name": "notes-bin"},"author": {
+                "@type": "Person",
+                "name": "notes-bin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="" data-header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Bin&#39;s Notes">Bin&#39;s Notes</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Bin&#39;s Notes">Bin&#39;s Notes</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">本地Yum源搭建</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>notes-bin</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;835 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#所需软件">所需软件</a></li>
+    <li><a href="#同步上游源到本地">同步上游源到本地</a></li>
+    <li><a href="#生成本地源元仓数据">生成本地源元仓数据</a></li>
+    <li><a href="#配置web服务">配置web服务</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法记录在此。</p>
+<h2 id="所需软件">所需软件</h2>
+<ol>
+<li>reposync， 同步上游源到本地，也可以直接拷贝ISO镜像中的文件</li>
+<li>createrepo，生成本地源元仓数据</li>
+<li>nginx、caddy或其它web服务软件</li>
+</ol>
+<h2 id="同步上游源到本地">同步上游源到本地</h2>
+<ol>
+<li>
+<p><code>reposync</code> 会依据本机中的yum源配置进行上游源的同步，所以要先配置本机的yum源，可选的yum源有很多，如 <a href="https://mirrors.aliyun.com" target="_blank" rel="noopener noreffer ">阿里镜像站</a>、<a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener noreffer ">清华大学开源镜像站</a>、 <a href="https://mirrors.ustc.edu.cn/" target="_blank" rel="noopener noreffer ">中国科学技术大学开源软件镜像</a>、<a href="https://mirrors.163.com/" target="_blank" rel="noopener noreffer ">网易开源镜像站</a>、<a href="https://mirrors.sohu.com/" target="_blank" rel="noopener noreffer ">搜狐镜像站</a>， 可以选择其中一个做为本机的yum源来配置。配置完成用<code>yum makecache</code>来测试配置是否正确。</p>
+</li>
+<li>
+<p>创建一个存放包文件的目录，如包含epel包的大约需要30GB左右。</p>
+</li>
+<li>
+<p>使用<code>reposync</code> 进行上游源同步；<code>reposync</code> 有三个关键参数，<code>-n</code> 是下载最新包；<code>--repoid</code> 是需要同步那些上游源的包，这个<code>id</code> 是在第一步中配置本机yum源repo文件中的方括号中的名字，可以指定多个进行同步；<code>-p</code> 指定同步的目录，当前在指定的目录中也可不加。</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /data/centos
+</span></span><span class="line"><span class="cl">reposync -n --repoid<span class="o">=</span>base --repoid<span class="o">=</span>extras --repoid<span class="o">=</span>updates -p /data/centos
+</span></span></code></pre></div><blockquote>
+<p>几十G的包同步需要耗很多时间，如果不需要使用最新的软件包，可以直接下载ISO镜像文件，并提取其中的包文件，或者直接拷贝ISO光盘的包文件到服务器进行源的搭建。</p>
+</blockquote>
+<h2 id="生成本地源元仓数据">生成本地源元仓数据</h2>
+<p>同步完成后，会在指定的同步目录中生成以<code>--repoid</code> 为名称的文件夹，如同步多个则生成多个目录。目录下包含名字为<code>Packages</code> 子文件夹中存放同步的包文件。在这些文件夹里执行<code>createrepo .</code>生成本地yum源的元仓数据；如同步了多个<code>--repoid</code> 需根据自己需求逐个生成。</p>
+<h2 id="配置web服务">配置web服务</h2>
+<p>至此yum源重要部分已搭建完，局域网中的服务器需要访问此yum源，需要配置web服务。</p>
+<p>临时使用可以直接在yum源的目录中执行<code>python3 -m http.server 8080</code> 开启一个简单的web服务来提供yum源的访问。</p>
+<p>如需要长期稳定提供yum源服务，则需要配置web服务。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E5%85%B3%E4%BA%8E/" class="prev" rel="prev" title="关于"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>关于</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">notes-bin</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
