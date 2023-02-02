@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>本地Yum源搭建 - Bin&#39;s Notes</title><meta name="Description" content="notes-bin的个人博客"><meta property="og:title" content="本地Yum源搭建" />
-<meta property="og:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法" />
+<meta property="og:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作，下面是搭建方法。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://notes-bin.github.io/posts/linux/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T11:23:39+08:00" />
 <meta property="article:modified_time" content="2023-01-29T11:23:39+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="本地Yum源搭建"/>
-<meta name="twitter:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法"/>
+<meta name="twitter:description" content="在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作，下面是搭建方法。"/>
 <meta name="application-name" content="Bin&#39;s Notes">
 <meta name="apple-mobile-web-app-title" content="Bin&#39;s Notes"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/"
-        },"genre": "posts","wordcount":  835 ,
+        },"genre": "posts","wordcount":  1051 ,
         "url": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/","datePublished": "2023-01-29T11:23:39+08:00","dateModified": "2023-01-29T11:23:39+08:00","publisher": {
             "@type": "Organization",
             "name": "notes-bin"},"author": {
@@ -69,8 +69,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">本地Yum源搭建</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>notes-bin</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;835 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1051 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -84,7 +84,7 @@
     <li><a href="#配置web服务">配置web服务</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作。下面将搭建的方法记录在此。</p>
+            </div><div class="content" id="content"><p>在局域网不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作，下面是搭建方法。</p>
 <h2 id="所需软件">所需软件</h2>
 <ol>
 <li>reposync， 同步上游源到本地，也可以直接拷贝ISO镜像中的文件</li>
@@ -113,7 +113,32 @@
 <h2 id="配置web服务">配置web服务</h2>
 <p>至此yum源重要部分已搭建完，局域网中的服务器需要访问此yum源，需要配置web服务。</p>
 <p>临时使用可以直接在yum源的目录中执行<code>python3 -m http.server 8080</code> 开启一个简单的web服务来提供yum源的访问。</p>
-<p>如需要长期稳定提供yum源服务，则需要配置web服务。</p>
+<p>为了长期稳定提供yum源服务，下面记录使用 <code>docker-compose</code> 管理<strong>Nginx镜像</strong>提供Web服务。</p>
+<p>在配置前需要服务器安装 <code>docker</code>、<code>docker-compose</code>两个软件。安装方法就不展开说明了。</p>
+<ul>
+<li>执行 <code>mkdir /data/yum-repo</code> ，创建一个目录存放 <strong>docker-compose.yml</strong>  文件，用于 <code>docker-compse</code>软件的项目目录</li>
+<li>执行 <code>vi /data/yum-repo/docker-compose.yml</code>， 并粘贴以下代码到这个文件。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-serv</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">yum-repo-subnet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">/data/centos</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/nginx/html</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">yum-repo-subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">yum-repo-subnet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>执行 <code>docker-compose up -d</code> 命令，启动一个web服务。</li>
+</ul>
+<p>这时yum源就有了可以为其它服务器提供服务器的功能了。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
