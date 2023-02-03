@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/"
-        },"genre": "posts","keywords": "linux","wordcount":  1048 ,
+        },"genre": "posts","keywords": "linux","wordcount":  1030 ,
         "url": "https:\/\/notes-bin.github.io\/posts\/linux\/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA\/","datePublished": "2023-01-29T11:23:39+08:00","dateModified": "2023-01-29T11:23:39+08:00","publisher": {
             "@type": "Organization",
             "name": "notes-bin"},"author": {
@@ -69,7 +69,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">本地Yum源搭建</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>notes-bin</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1048 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1030 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -87,9 +87,9 @@
             </div><div class="content" id="content"><p>在不能连接互联网时，局域网内又有很多CentOS服务器需要安装、配置、管理时，搭建本地yum源，就成为迫在眉睫的工作，下面是搭建方法。</p>
 <h2 id="所需软件">所需软件</h2>
 <ol>
-<li>reposync， 同步上游源到本地，也可以直接拷贝ISO镜像中的文件</li>
-<li>createrepo，生成本地源元仓数据</li>
-<li>nginx、caddy或其它web服务软件</li>
+<li><code>reposync</code>  同步上游源到本地，也可以直接拷贝ISO镜像中的文件</li>
+<li><code>createrepo</code> 生成本地源元仓数据</li>
+<li><code>nginx、caddy</code> 或其它web服务软件</li>
 </ol>
 <h2 id="同步上游源到本地">同步上游源到本地</h2>
 <ol>
