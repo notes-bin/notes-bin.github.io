@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>docker-compose由简入深 - Bin&#39;s Notes</title><meta name="Description" content="notes-bin的个人博客"><meta property="og:title" content="docker-compose由简入深" />
+<meta property="og:description" content="​ 在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-06T15:45:22+08:00" />
+<meta property="article:modified_time" content="2023-02-06T15:45:22+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="docker-compose由简入深"/>
+<meta name="twitter:description" content="​ 在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完"/>
+<meta name="application-name" content="Bin&#39;s Notes">
+<meta name="apple-mobile-web-app-title" content="Bin&#39;s Notes"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1/" /><link rel="prev" href="https://notes-bin.github.io/posts/linux/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "docker-compose由简入深",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/notes-bin.github.io\/posts\/docker-compose\/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1\/"
+        },"genre": "posts","keywords": "docker, docker-compose","wordcount":  1192 ,
+        "url": "https:\/\/notes-bin.github.io\/posts\/docker-compose\/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1\/","datePublished": "2023-02-06T15:45:22+08:00","dateModified": "2023-02-06T15:45:22+08:00","publisher": {
+            "@type": "Organization",
+            "name": "notes-bin"},"author": {
+                "@type": "Person",
+                "name": "notes-bin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="" data-header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Bin&#39;s Notes">Bin&#39;s Notes</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Bin&#39;s Notes">Bin&#39;s Notes</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">docker-compose由简入深</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>notes-bin</a></span>&nbsp;<span class="post-category">included in <a href="/categories/docker-compose/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>docker-compose</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-06">2023-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1192 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单介绍">简单介绍</a></li>
+    <li><a href="#经常使用">经常使用</a></li>
+    <li><a href="#部署实例">部署实例</a>
+      <ul>
+        <li><a href="#nginx部署">Nginx部署</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​	在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完就删。这些很小的环境根本不用到 <code>K8S</code> 这样的集群编排工具，但每一次用 <code>docker</code> 启动容器又要输入一长串的指令，最早我写 <code>shell</code> 脚本批量执行，可是还是非常麻烦；用 <code>docker-compose</code> 却给我带来了如沐浴春风的感受。我会由简入深带领大家部署一个自己心意的网站。而且我会把我使用到的<code>docker-compose.yml</code> 实例逐个放出，供大家方便部署。</p>
+<h2 id="简单介绍">简单介绍</h2>
+<p><code>docker-compose</code> 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<blockquote>
+<p>安装过程就不多说了，参考 <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreffer ">Docker官方网站</a></p>
+</blockquote>
+<h2 id="经常使用">经常使用</h2>
+<p><code>docker-compose</code> 参数有很多，经常使用的只有几个：</p>
+<ul>
+<li><code>docker-compose up</code> 创建，并启动容器，<code>-d</code> 后台运行。</li>
+<li><code>docker-compose down</code> 停止，并删除容器、网络。</li>
+<li><code>docker-compose ls</code> 列出运行的 <strong>compose</strong> 项目</li>
+<li><code>docker-compose ps</code> 列出运行中的容器</li>
+<li><code>docker-compose top</code> 显示 <strong>compose</strong> 项目运行的进程</li>
+<li><code>docker-compose logs</code> 查看 <strong>compose</strong> 项目的日志，<code>-f</code> 参数是实时查看</li>
+<li><code>docker-compose restart</code> 重启 <strong>compose</strong> 项目</li>
+<li><code>docker-compose stop</code> 停止 <strong>compose</strong> 项目</li>
+</ul>
+<p>其它参数请使用<code>docker-compose --help </code> 查看参考</p>
+<h2 id="部署实例">部署实例</h2>
+<h3 id="nginx部署">Nginx部署</h3>
+<ol>
+<li>执行 <code>docker pull nginx:alpine</code> 拉取 <strong>nginx</strong> 镜像，基于alpine构建的镜像相对比较小（囊中羞涩，云服务资源比较保贵）。</li>
+<li><strong>docker-compose</strong> 会以存放 <code>docker-compose.yml</code> 文件的目录为一个项目，所以为了方便管理我会创建以下目录方便管理。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir project/<span class="o">{</span>data,config<span class="o">}</span>
+</span></span></code></pre></div><p>project为项目目录，名字可以自行定义，根目录保存docker-compose.yml文件，一个项目也许有很多个容器，config目录用来保存所有容器的配置文件，data用来保存所有的数据。也可以不用这种方法，可以根据自己的喜好定义。</p>
+<ol start="3">
+<li>查看和拷贝<strong>nginx</strong>配置</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it --rm nginx:alpine sh
+</span></span></code></pre></div><ul>
+<li><code>--rm</code> 会在退出容器时删除容器</li>
+<li>基于alpine构建的容器默认安装的<code>sh</code> shell，不习惯的小伙伴可以重新构建镜像。</li>
+<li>容器中的时区不是东八时，时区会不正确；正确的时间，需要重新构建镜像。</li>
+</ul>
+<blockquote>
+<p>后期我会专门说基于<code>alpine</code> 镜像的构建。</p>
+</blockquote>
+<p>​	上面的命令启动一个nginx容器并进入容器，我们要查看一下容器里默认的nginx配置，最重要的看一下<code>root</code> 配置指向的是那个目录，后面在编写<code>docker-compose.yml</code> 时要使用到，很重要。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> project
+</span></span><span class="line"><span class="cl">docker cp b8bf:/etc/nginx config/
+</span></span></code></pre></div><ul>
+<li><code>b8bf</code> 是用 <code>docker ps</code> 查看到的启动的nginx容器的 <strong>id</strong>，因为 <code>容器id</code> 的唯一性，可以在写命令的时间不用写全， docker就可以自己识别。</li>
+<li><code>cp</code> 就是拷贝，前面的是源，后面的是目标；也是可从外面往容器里拷</li>
+</ul>
+<ol start="4">
+<li>这些完成后，准备工作就完了，开始编写<code>docker-compose.yml</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx_serv</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span>- <span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span>- <span class="l">./data:/usr/share/nginx/html</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span>- <span class="l">./config/nginx:/etc/nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 	 </span><span class="l">nginx_subnet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 	 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">nginx_subnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx_subnet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span></code></pre></div><p><code>docker-compose.yml</code> 查不多编写完了，使用 <code>docker-compose up -d</code> 就可以启一个web服务了。云服务器防火墙80端口，尝试一下能不能访问了。nginx的参数需要的修改，可以直接修改<code>config/nginx</code> 目录下的配置文件，修改完成只需要 <code>docker-compose restart</code> 重启一下容器。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>引用 <a href="https://www.runoob.com/docker/docker-compose.html" target="_blank" rel="noopener noreffer ">菜鸟教程Compose简介</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/docker/">docker</a>,&nbsp;<a href="/tags/docker-compose/">docker-compose</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux/%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" class="prev" rel="prev" title="本地Yum源搭建"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>本地Yum源搭建</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">notes-bin</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
