@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>docker-compose - Category - Bin&#39;s Notes</title>
+        <link>https://notes-bin.github.io/categories/docker-compose/</link>
+        <description>docker-compose - Category - Bin&#39;s Notes</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
+            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Mon, 06 Feb 2023 15:45:22 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/categories/docker-compose/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Compose使用</title>
+    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Mon, 06 Feb 2023 15:45:22 &#43;0800</pubDate>
+    <author>notes-bin</author>
+    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优持体验，已深入我心。搭建小站、博客或者临时测试环境，用容器随拉随用，]]></description>
+</item>
+</channel>
+</rss>
