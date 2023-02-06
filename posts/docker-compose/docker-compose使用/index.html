@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Docker Compose使用 - Bin&#39;s Notes</title><meta name="Description" content="notes-bin的个人博客"><meta property="og:title" content="Docker Compose使用" />
-<meta property="og:description" content="在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优持体验，已深入我心。搭建小站、博客或者临时测试环境，用容器随拉随用，" />
+<meta property="og:description" content="​ 在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-06T15:45:22+08:00" />
 <meta property="article:modified_time" content="2023-02-06T15:45:22+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker Compose使用"/>
-<meta name="twitter:description" content="在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优持体验，已深入我心。搭建小站、博客或者临时测试环境，用容器随拉随用，"/>
+<meta name="twitter:description" content="​ 在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完"/>
 <meta name="application-name" content="Bin&#39;s Notes">
 <meta name="apple-mobile-web-app-title" content="Bin&#39;s Notes"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/notes-bin.github.io\/posts\/docker-compose\/docker-compose%E4%BD%BF%E7%94%A8\/"
-        },"genre": "posts","keywords": "docker, docker-compose","wordcount":  460 ,
+        },"genre": "posts","keywords": "docker, docker-compose","wordcount":  456 ,
         "url": "https:\/\/notes-bin.github.io\/posts\/docker-compose\/docker-compose%E4%BD%BF%E7%94%A8\/","datePublished": "2023-02-06T15:45:22+08:00","dateModified": "2023-02-06T15:45:22+08:00","publisher": {
             "@type": "Organization",
             "name": "notes-bin"},"author": {
@@ -69,7 +69,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Docker Compose使用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>notes-bin</a></span>&nbsp;<span class="post-category">included in <a href="/categories/docker-compose/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>docker-compose</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-06">2023-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;460 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-06">2023-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;456 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -82,7 +82,7 @@
     <li><a href="#使用">使用</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优持体验，已深入我心。搭建小站、博客或者临时测试环境，用容器随拉随用，用完就删。这些很小的环境根本不用到 <code>K8S</code> 这样的集群编排工具，但每一次用 <code>docker</code> 启动容器又要输入一长串的指令，最早我会写 <code>shell</code> 脚本批量执行；可以还是非常麻烦，这样 <code>docker-compose</code> 就给我带来了如沐浴春风的感受。后面我会把我使用的<code>docker-compose.yml</code> 实例逐个放出，供大家方便部署。</p>
+            </div><div class="content" id="content"><p>​	在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完就删。这些很小的环境根本不用到 <code>K8S</code> 这样的集群编排工具，但每一次用 <code>docker</code> 启动容器又要输入一长串的指令，最早我写 <code>shell</code> 脚本批量执行，可是还是非常麻烦；用 <code>docker-compose</code> 却给我带来了如沐浴春风的感受。后面我会把我使用的<code>docker-compose.yml</code> 实例逐个放出，供大家方便部署。</p>
 <h2 id="简介">简介</h2>
 <p><code>docker-compose</code> 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
 <blockquote>
