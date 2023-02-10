@@ -1,6 +1,6 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Bin&#39;s Notes</title>
+        <title>大叔笔记</title>
         <link>https://notes-bin.github.io/</link>
         <description>notes-bin的个人博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>

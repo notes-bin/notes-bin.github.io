@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>linux - Tag - Bin&#39;s Notes</title>
+        <title>linux - Tag - 大叔笔记</title>
         <link>https://notes-bin.github.io/tags/linux/</link>
-        <description>linux - Tag - Bin&#39;s Notes</description>
+        <description>linux - Tag - 大叔笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
             <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Sun, 29 Jan 2023 11:23:39 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>本地Yum源搭建</title>

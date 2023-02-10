@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - Bin&#39;s Notes</title>
+        <title>All Posts - 大叔笔记</title>
         <link>https://notes-bin.github.io/posts/</link>
-        <description>All Posts | Bin&#39;s Notes</description>
+        <description>All Posts | 大叔笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
             <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Mon, 06 Feb 2023 15:45:22 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>docker-compose由简入深</title>
