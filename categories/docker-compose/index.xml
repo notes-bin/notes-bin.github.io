@@ -4,7 +4,15 @@
         <link>https://notes-bin.github.io/categories/docker-compose/</link>
         <description>docker-compose - Category - 大叔笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
-            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/categories/docker-compose/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Fri, 17 Feb 2023 09:01:38 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/categories/docker-compose/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Compose之数据库实例</title>
+    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E4%BE%8B/</link>
+    <pubDate>Fri, 17 Feb 2023 09:01:38 &#43;0800</pubDate>
+    <author>notes-bin</author>
+    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E4%BE%8B/</guid>
+    <description><![CDATA[Mysql数据库 version: &#34;3.9&#34; services: mysql: container_name: mysql-serv image: mysql:lastest restart: always ports: - 13306:3306 networks: - mysql-serv-subnet environment: MYSQL_DATABASE: owner MYSQL_USER: owner_admin MYSQL_PASSWORD: owner@mysql#123 MYSQL_ROOT_PASSWORD: root@123#pwd! TZ: Asia/Shanghai volumes: - ./data:/var/lib/mysql - /etc/localtime:/etc/localtime:ro - /etc/timezone:/etc/timezone:ro command: - --character-set-server=utf8 - --collation-server=utf8-bin networks: mysql-serv-subnet: name: mysql-serv-subnet driver: bridge Mariadb 数据库 version: &#34;3.9&#34; services: mariadb: container_name: mariadb-serv image: mariadb:lastest restart: always ports: - 23306:3306]]></description>
+</item>
+<item>
     <title>Docker Compose之web实例</title>
     <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8Bweb%E5%AE%9E%E4%BE%8B/</link>
     <pubDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</pubDate>
