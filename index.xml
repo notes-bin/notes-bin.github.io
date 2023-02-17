@@ -4,14 +4,22 @@
         <link>https://notes-bin.github.io/</link>
         <description>notes-bin的个人博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
-            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Mon, 06 Feb 2023 15:45:22 &#43;0800</lastBuildDate>
+            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</lastBuildDate>
             <atom:link href="https://notes-bin.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>docker-compose由简入深</title>
-    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1/</link>
+    <title>Docker Compose之web实例</title>
+    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8Bweb%E5%AE%9E%E4%BE%8B/</link>
+    <pubDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</pubDate>
+    <author>notes-bin</author>
+    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8Bweb%E5%AE%9E%E4%BE%8B/</guid>
+    <description><![CDATA[Nginx部署 执行 docker pull nginx:alpine 拉取 nginx 镜像，基于alpine构建的镜像相对比较小（囊中羞涩，云服务资源比较保贵）。 docker-compose 会以存放 docker-compose.yml 文件的目录为一个项目，]]></description>
+</item>
+<item>
+    <title>docker-compose简介</title>
+    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%AE%80%E4%BB%8B/</link>
     <pubDate>Mon, 06 Feb 2023 15:45:22 &#43;0800</pubDate>
     <author>notes-bin</author>
-    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%94%B1%E7%AE%80%E5%85%A5%E6%B7%B1/</guid>
+    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E7%AE%80%E4%BB%8B/</guid>
     <description><![CDATA[​ 在容器化的大潮流下，使用容器带来的快速部署、便捷管理、不污染原生环境的优质体验，已深入我心。搭建小站、博客或者临时测试环境，随拉随用，用完]]></description>
 </item>
 <item>

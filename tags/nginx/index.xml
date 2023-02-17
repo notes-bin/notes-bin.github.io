@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Nginx - Tag - 大叔笔记</title>
+        <link>https://notes-bin.github.io/tags/nginx/</link>
+        <description>Nginx - Tag - 大叔笔记</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>417086484@qq.com (notes-bin)</managingEditor>
+            <webMaster>417086484@qq.com (notes-bin)</webMaster><lastBuildDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</lastBuildDate><atom:link href="https://notes-bin.github.io/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Compose之web实例</title>
+    <link>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8Bweb%E5%AE%9E%E4%BE%8B/</link>
+    <pubDate>Fri, 17 Feb 2023 08:50:57 &#43;0800</pubDate>
+    <author>notes-bin</author>
+    <guid>https://notes-bin.github.io/posts/docker-compose/docker-compose%E4%B9%8Bweb%E5%AE%9E%E4%BE%8B/</guid>
+    <description><![CDATA[Nginx部署 执行 docker pull nginx:alpine 拉取 nginx 镜像，基于alpine构建的镜像相对比较小（囊中羞涩，云服务资源比较保贵）。 docker-compose 会以存放 docker-compose.yml 文件的目录为一个项目，]]></description>
+</item>
+</channel>
+</rss>
